@@ -3,19 +3,13 @@ package com.victor.generator;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,7 +23,7 @@ public class MpGenerator {
      * MySQL 生成演示
      * </p>
      */
-   /* public static void main(String[] args) {
+    public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -52,14 +46,14 @@ public class MpGenerator {
         dsc.setDbType(DbType.MYSQL);
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("mysql");
-        dsc.setUrl("jdbc:mysql://39.108.217.163:6033/shiro?characterEncoding=utf8");
+        dsc.setPassword("root");
+        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/shiro?characterEncoding=utf8");
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         //strategy.setTablePrefix("beautiful_");// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] { "permission","role" }); // 需要生成的表
+        strategy.setInclude(new String[] { "permission","role","user"}); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -111,6 +105,6 @@ public class MpGenerator {
         mpg.execute();
         // 打印注入设置
         System.err.println(mpg.getCfg().getMap().get("abc"));
-    }*/
+    }
 
 }
