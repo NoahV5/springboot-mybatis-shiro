@@ -6,11 +6,14 @@ import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -58,6 +61,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/logout", "logout");
 
 		// 过滤链
+		filterChainDefinitionMap.put("/**", "user");
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/img/**", "anon");
@@ -71,8 +75,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/sencCode", "anon"); // 发送邮箱验证码
 		filterChainDefinitionMap.put("/admin/isUsername/**", "anon"); // 判断用户名是否存在
 		filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
-
-		filterChainDefinitionMap.put("/**", "authc");
+		//filterChainDefinitionMap.put("/**", "authc");
 		/**
 		 * anon:所有url都都可以匿名访问;
 		 * authc: 需要认证才能进行访问;
@@ -93,7 +96,9 @@ public class ShiroConfiguration {
 
 		//设置realm
 		securityManager.setRealm(myShiroRealm());
+		//注入缓存管理器,如果多次执行,也是同个对象,属于单例
 		securityManager.setCacheManager(ehCacheManager());
+		securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
 	}
 
@@ -121,12 +126,14 @@ public class ShiroConfiguration {
 
 		hashedCredentialsMatcher.setHashAlgorithmName("MD5"); // 散列算法:这里使用MD5算法;
 		hashedCredentialsMatcher.setHashIterations(1); // 散列的次数，比如散列两次，相当于 md5(md5(""));
-
 		return hashedCredentialsMatcher;
 	}
 
 	/**
-	 * 配置Shiro 缓存
+	 * shiro缓存管理器;
+	 * 需要注入对应的其它的实体类中：
+	 * 1、安全管理器：securityManager
+	 * 可见securityManager是整个shiro的核心；
 	 * @return
 	 */
 	@Bean
@@ -167,6 +174,34 @@ public class ShiroConfiguration {
 		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
 		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 		return authorizationAttributeSourceAdvisor;
+	}
+
+	/**
+	 * cookie对象;
+	 * @return
+	 */
+	@Bean
+	public SimpleCookie rememberMeCookie(){
+		System.out.println("ShiroConfiguration.rememberMeCookie()");
+		//这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
+		SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+		//<!-- 记住我cookie生效时间30天 ,单位秒;-->
+		simpleCookie.setMaxAge(259200);
+		return simpleCookie;
+	}
+
+	/**
+	 * cookie管理对象;
+	 * @return
+	 */
+	@Bean
+	public CookieRememberMeManager rememberMeManager(){
+		System.out.println("ShiroConfiguration.rememberMeManager()");
+		CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+		cookieRememberMeManager.setCookie(rememberMeCookie());
+		//rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+		cookieRememberMeManager.setCipherKey(Base64.decode("2AvVhdsgUs0FSA3SDFAdag=="));
+		return cookieRememberMeManager;
 	}
 }
 

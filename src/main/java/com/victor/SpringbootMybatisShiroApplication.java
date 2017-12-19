@@ -1,11 +1,11 @@
 package com.victor;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-@MapperScan({"com.victor.sys.mapper.*"})
+import org.springframework.context.annotation.Import;
+
 @SpringBootApplication
+@Import({DynamicDataSourceRegister.class}) // 注册动态多数据源
 public class SpringbootMybatisShiroApplication {
 
 

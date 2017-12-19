@@ -11,11 +11,18 @@ endpoints.health.sensitive: false
 
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/shiro?useUnicode=true&characterEncoding=utf8&useSSL=true
-    username: root
-    password: root
+    test1:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/shiro?useUnicode=true&characterEncoding=utf8&useSSL=true
+      username: root
+      password: root
+    test2:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/shiro2?useUnicode=true&characterEncoding=utf8&useSSL=true
+      username: root
+      password: root
   mail:
     host: smtp.163.com
     username: fanshuye1304@163.com

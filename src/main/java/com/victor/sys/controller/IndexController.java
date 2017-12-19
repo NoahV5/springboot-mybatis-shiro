@@ -2,6 +2,7 @@ package com.victor.sys.controller;
 
 import com.victor.common.controller.BaseController;
 import com.victor.common.result.JsonResult;
+import com.victor.springboot.javacode.service.JavaCodeService;
 import com.victor.sys.entity.Menu;
 import com.victor.sys.service.IPermissionService;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ public class IndexController extends BaseController{
 
 	@Resource
 	private IPermissionService permissionService;
+
 
 	/**
 	 * 跳转到登录页面
@@ -53,9 +56,9 @@ public class IndexController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/mylogin")
-	public String login(String username, String password, Map<String, Object> map,Model model){
+	public String login(String username, String password, Map<String, Object> map,Model model,boolean rememberMe){
 		Subject subject = SecurityUtils.getSubject();//获取当前用户
-		UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+		UsernamePasswordToken token = new UsernamePasswordToken(username,password,rememberMe);
 		JsonResult result = new JsonResult();
 		try {
 			subject.login(token);
