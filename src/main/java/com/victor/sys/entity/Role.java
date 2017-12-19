@@ -59,21 +59,21 @@ public class Role extends Model<Role> {
 	@TableField("gmt_modified")
 	private Date gmtModified;
 
-	/**
-	 * 一个角色拥有多个权限
-	 */
-	//@Transient
-	@ManyToMany
-	@JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
-	private Set<Permission> permissionSet;
-
-	/**
-	 * 一个角色被多个用户拥有
-	 */
-//	@Transient
-	@ManyToMany
-	@JoinTable(name = "user_role",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "uid")})
-	private Set<Role> roleSet;
+//	/**
+//	 * 一个角色拥有多个权限
+//	 */
+//	//@Transient
+//	@ManyToMany
+//	@JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
+//	private Set<Permission> permissionSet;
+//
+//	/**
+//	 * 一个角色被多个用户拥有
+//	 */
+////	@Transient
+//	@ManyToMany
+//	@JoinTable(name = "user_role",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "uid")})
+//	private Set<Role> roleSet;
 
 
 	public Long getId() {
@@ -132,21 +132,21 @@ public class Role extends Model<Role> {
 		this.gmtModified = gmtModified;
 	}
 
-	public Set<Permission> getPermissionSet() {
-		return permissionSet == null ? Collections.EMPTY_SET : permissionSet;
-	}
-
-	public void setPermissionSet(Set<Permission> permissionList) {
-		this.permissionSet = permissionList;
-	}
-
-	public Set<Role> getRoleSet() {
-		return roleSet  == null ? Collections.EMPTY_SET : roleSet;
-	}
-
-	public void setRoleSet(Set<Role> roleList) {
-		this.roleSet = roleList;
-	}
+//	public Set<Permission> getPermissionSet() {
+//		return permissionSet == null ? Collections.EMPTY_SET : permissionSet;
+//	}
+//
+//	public void setPermissionSet(Set<Permission> permissionList) {
+//		this.permissionSet = permissionList;
+//	}
+//
+//	public Set<Role> getRoleSet() {
+//		return roleSet  == null ? Collections.EMPTY_SET : roleSet;
+//	}
+//
+//	public void setRoleSet(Set<Role> roleList) {
+//		this.roleSet = roleList;
+//	}
 
 	@Override
 	protected Serializable pkVal() {

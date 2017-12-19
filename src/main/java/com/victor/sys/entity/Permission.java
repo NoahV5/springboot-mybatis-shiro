@@ -82,9 +82,9 @@ public class Permission extends Model<Permission> {
 	@TableField("gmt_modified")
 	private Date gmtModified;
 
-	@ManyToMany
-	@JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
-	private Set<Role> roleSet;
+//	@ManyToMany
+//	@JoinTable(name = "role_permission",joinColumns = {@JoinColumn(name = "pid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
+//	private Set<Role> roleSet;
 
 
 	public Long getId() {
@@ -183,13 +183,13 @@ public class Permission extends Model<Permission> {
 		this.gmtModified = gmtModified;
 	}
 
-	public Set<Role> getRoleSet() {
-		return roleSet == null ? Collections.EMPTY_SET :roleSet;
-	}
-
-	public void setRoleSet(Set<Role> roleSet) {
-		this.roleSet = roleSet;
-	}
+//	public Set<Role> getRoleSet() {
+//		return roleSet == null ? Collections.EMPTY_SET :roleSet;
+//	}
+//
+//	public void setRoleSet(Set<Role> roleSet) {
+//		this.roleSet = roleSet;
+//	}
 
 	@Override
 	protected Serializable pkVal() {

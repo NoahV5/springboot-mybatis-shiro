@@ -69,13 +69,13 @@ public class User extends Model<User> {
 	@TableField("gmt_modified")
 	private Date gmtModified;
 
-	/**
-	 * 一个用户拥有的角色集合
-	 */
-	//@Transient
-	@ManyToMany(fetch = FetchType.EAGER)//立即从数据库进行数据加载
-	@JoinTable(name = "user_role",joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
-	private Set<Role> roleSet;
+//	/**
+//	 * 一个用户拥有的角色集合
+//	 */
+//	//@Transient
+//	@ManyToMany(fetch = FetchType.EAGER)//立即从数据库进行数据加载
+//	@JoinTable(name = "user_role",joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "rid")})
+//	private Set<Role> roleSet;
 
 
 	public Long getId() {
@@ -154,14 +154,14 @@ public class User extends Model<User> {
 	protected Serializable pkVal() {
 		return this.id;
 	}
-
-	public Set<Role> getRoleSet() {
-		return roleSet == null ? Collections.EMPTY_SET:roleSet;
-	}
-
-	public void setRoleSet(Set<Role> roleList) {
-		this.roleSet = roleList;
-	}
+//
+//	public Set<Role> getRoleSet() {
+//		return roleSet == null ? Collections.EMPTY_SET:roleSet;
+//	}
+//
+//	public void setRoleSet(Set<Role> roleList) {
+//		this.roleSet = roleList;
+//	}
 
 	public String getGredentialsSat(){
 		return this.username+this.salt;

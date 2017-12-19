@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * Describe: MybatisPlus 配置 官方Demo
  */
 @Configuration
-@MapperScan({"com.victor.mapper*"})
+@MapperScan({"com.victor.sys.mapper.**"})
 public class MybatisPlusConfig {
 
     /**

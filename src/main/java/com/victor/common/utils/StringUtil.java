@@ -1,10 +1,5 @@
 package com.victor.common.utils;
-
 /**
- * Author: XiaoBingBy
- * Email: XiaoBingBy@qq.com
- * Date: 2017/9/1
- * Time: 00:00
  * Describe: String工具类
  */
 public class StringUtil {

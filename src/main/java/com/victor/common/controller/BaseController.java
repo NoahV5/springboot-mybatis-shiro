@@ -1,6 +1,6 @@
 package com.victor.common.controller;
 
-import org.apache.catalina.User;
+import com.victor.sys.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import com.victor.common.result.JsonResult;
@@ -84,8 +84,8 @@ public class BaseController {
      */
     public Long getCurrentLoginId(){
         Subject currentUser = SecurityUtils.getSubject();
-       // User user = currentUser.getPrincipals().oneByType(User.class);
-        return null;
+        User user = currentUser.getPrincipals().oneByType(User.class);
+        return user.getId();
     }
 
     /**
@@ -93,8 +93,8 @@ public class BaseController {
      */
     public User getCurrentUser() {
         Subject currentUser = SecurityUtils.getSubject();
-       // User user = currentUser.getPrincipals().oneByType(User.class);
-        return null;
+       User user = currentUser.getPrincipals().oneByType(User.class);
+        return user;
     }
     
 }

@@ -2,10 +2,12 @@
 
 #端口
 server:
-  port: 8080
+  port: 8090
 
 #文件上传路径
 file-upload-path: E:/test
+
+endpoints.health.sensitive: false
 
 spring:
   datasource:
@@ -34,9 +36,9 @@ spring:
 
 #MyBatis
 mybatis-plus:
-  mapper-locations: classpath:/mapper/*/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.victor.entity
+  typeAliasesPackage: com.victor.sys.entity
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
     id-type: 0
@@ -54,7 +56,7 @@ mybatis-plus:
     #logic-delete-value: 0
     #logic-not-delete-value: 1
     #自定义填充策略接口实现
-    meta-object-handler: com.xiaobingby.config.mybatis.MyMetaObjectHandler
+    meta-object-handler: com.victor.config.mybatis.MyMetaObjectHandler
     #自定义SQL注入器
     #sql-injector: com.baomidou.springboot.xxx
   configuration:
@@ -64,3 +66,40 @@ mybatis-plus:
 #logging
 logging:
   level: debug
+
+########################################################
+###REDIS (RedisProperties) redis基本配置；
+########################################################
+# database name
+spring.redis.database: 0
+# server host1
+spring.redis.host: 39.108.217.163
+# server password
+#spring.redis.password=
+#connection port
+spring.redis.port: 6379
+spring.redis.timeout: 3000
+# pool settings ...
+spring.redis.pool.max-idle: 8
+spring.redis.pool.min-idle: 0
+spring.redis.pool.max-active: 8
+spring.redis.pool.max-wait: 1
+# name of Redis server
+#spring.redis.sentinel.master=
+# comma-separated list of host:port pairs
+#spring.redis.sentinel.nodes=
+
+########################################################
+### Java Persistence Api
+########################################################
+# Specify the DBMS
+#spring.jpa.database: MYSQL
+# Show or not log for each sql query
+#spring.jpa.show-sql: true
+# Hibernate ddl auto (create, create-drop, update)
+#spring.jpa.hibernate.ddl-auto: update
+# Naming strategy
+#[org.hibernate.cfg.ImprovedNamingStrategy | org.hibernate.cfg.DefaultNamingStrategy]
+#spring.jpa.hibernate.naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+# stripped before adding them to the entity manager)
+#spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect

@@ -3,10 +3,6 @@ package com.victor.common.utils;
 import java.util.Calendar;
 
 /**
- * Author: XiaoBingBy
- * Email: XiaoBingBy@qq.com
- * Date: 2017/9/1
- * Time: 00:00
  * Describe: 获取日期时间工具类
  */
 public class DateUtil {

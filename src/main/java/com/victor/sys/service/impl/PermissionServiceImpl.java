@@ -2,9 +2,12 @@ package com.victor.sys.service.impl;
 
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.victor.sys.entity.Menu;
 import com.victor.sys.entity.Permission;
 import com.victor.sys.mapper.PermissionMapper;
 import com.victor.sys.service.IPermissionService;
+import java.util.ArrayList;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +21,7 @@ import java.util.List;
  * @author Victor
  * @since 2017-12-16
  */
+@SuppressWarnings("all")
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
@@ -32,5 +36,43 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     @Override
     public List<Permission> findUserPermission(Long uid) {
         return permissionMapper.findUserPermission(uid);
+    }
+
+    /**
+     * 查询子菜单
+     * @param uid 用户ID
+     * @return
+     */
+    @Override
+    public List<Permission> findSubMenu(Long uid, Long pid) {
+        return permissionMapper.findSubMenu(uid,pid);
+    }
+    /**
+     * 获取用户拥有权限的按钮
+     * @param currentLoginId
+     * @return
+     */
+    @Override public List<Menu> createMenu(Long currentLoginId) {
+        List<Menu> menus  =  new ArrayList<>();
+        //获取用户的父菜单集合
+        List<Permission> userPermission = this.findUserPermission(currentLoginId);
+        userPermission.parallelStream().forEach(e->{
+            Menu menu = new Menu();
+            BeanUtils.copyProperties(e,menu);
+            menus.add(menu);
+        });
+        //获取子菜单集合
+        // 查询子菜单
+        menus.forEach(m -> {
+            List<Menu> temp = new ArrayList<>();
+            List<Permission> children = baseMapper.findSubMenu(currentLoginId, m.getId());
+            children.forEach(c -> {
+                Menu menu = new Menu();
+                BeanUtils.copyProperties(c, menu);
+                temp.add(menu);
+            });
+            m.setChildren(temp);
+        });
+        return menus;
     }
 }

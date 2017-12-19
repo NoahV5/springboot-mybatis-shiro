@@ -47,7 +47,7 @@ public class ShiroConfiguration {
 		// 登陆页面
 		shiroFilterFactoryBean.setLoginUrl("/admin/login.html");
 		// 登录成功后要跳转的链接
-		shiroFilterFactoryBean.setSuccessUrl("/admin/index");
+		shiroFilterFactoryBean.setSuccessUrl("/admin/index.html");
 		// 未授权界面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/500.html");
 
