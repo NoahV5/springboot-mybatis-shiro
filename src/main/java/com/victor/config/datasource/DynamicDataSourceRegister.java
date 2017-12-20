@@ -107,19 +107,16 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
 
 	/**
 	 * 初始化主数据源
-	 *
-	 * @author SHANHY
-	 * @create 2016年1月24日
 	 */
 	private void initDefaultDataSource(Environment env) {
 		// 读取主数据源
 		RelaxedPropertyResolver propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource.");
 		Map<String, Object> dsMap = new HashMap<>();
 		dsMap.put("type", propertyResolver.getProperty("type"));
-		dsMap.put("driver-class-name", propertyResolver.getProperty("driver-class-name"));
-		dsMap.put("url", propertyResolver.getProperty("url"));
-		dsMap.put("username", propertyResolver.getProperty("username"));
-		dsMap.put("password", propertyResolver.getProperty("password"));
+		dsMap.put("driver-class-name", propertyResolver.getProperty("base.driver-class-name"));
+		dsMap.put("url", propertyResolver.getProperty("base.url"));
+		dsMap.put("username", propertyResolver.getProperty("base.username"));
+		dsMap.put("password", propertyResolver.getProperty("base.password"));
 
 		defaultDataSource = buildDataSource(dsMap);
 
@@ -131,8 +128,6 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
 	 *
 	 * @param dataSource
 	 * @param env
-	 * @author SHANHY
-	 * @create  2016年1月25日
 	 */
 	private void dataBinder(DataSource dataSource, Environment env){
 		RelaxedDataBinder dataBinder = new RelaxedDataBinder(dataSource);
@@ -157,13 +152,10 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
 
 	/**
 	 * 初始化更多数据源
-	 *
-	 * @author SHANHY
-	 * @create 2016年1月24日
 	 */
 	private void initCustomDataSources(Environment env) {
 		// 读取配置文件获取更多数据源，也可以通过defaultDataSource读取数据库获取更多数据源
-		RelaxedPropertyResolver propertyResolver = new RelaxedPropertyResolver(env, "custom.datasource.");
+		RelaxedPropertyResolver propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource.");
 		String dsPrefixs = propertyResolver.getProperty("names");
 		for (String dsPrefix : dsPrefixs.split(",")) {// 多个数据源
 			Map<String, Object> dsMap = propertyResolver.getSubProperties(dsPrefix + ".");

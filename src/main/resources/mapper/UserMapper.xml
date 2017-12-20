@@ -14,5 +14,8 @@
 		<result column="gmt_create" property="gmtCreate" />
 		<result column="gmt_modified" property="gmtModified" />
 	</resultMap>
+	<select id="selectUserList" resultMap="BaseResultMap">
+			SELECT * FROM  user WHERE status = #{status}
+	</select>
 
 </mapper>

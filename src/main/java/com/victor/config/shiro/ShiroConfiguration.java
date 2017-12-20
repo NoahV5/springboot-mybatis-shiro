@@ -61,7 +61,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/logout", "logout");
 
 		// 过滤链
-		filterChainDefinitionMap.put("/**", "user");
+		//filterChainDefinitionMap.put("/**", "user");
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/img/**", "anon");

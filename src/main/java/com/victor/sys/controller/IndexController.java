@@ -2,9 +2,11 @@ package com.victor.sys.controller;
 
 import com.victor.common.controller.BaseController;
 import com.victor.common.result.JsonResult;
-import com.victor.springboot.javacode.service.JavaCodeService;
+import com.victor.config.datasource.TargetDataSource;
 import com.victor.sys.entity.Menu;
+import com.victor.sys.entity.User;
 import com.victor.sys.service.IPermissionService;
+import com.victor.sys.service.IUserService;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -13,8 +15,10 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,8 +29,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class IndexController extends BaseController{
 
+	private Logger logger = LoggerFactory.getLogger(IndexController.class);
+
 	@Resource
 	private IPermissionService permissionService;
+
+	@Resource
+	private IUserService userService;
 
 
 	/**
@@ -49,6 +58,17 @@ public class IndexController extends BaseController{
 		model.addAttribute("menus",menus);
 		return "/admin/index";
 	}
+
+	@TargetDataSource(name = "test1")
+	@RequestMapping("/test")
+	@Transactional
+	public void test2(){
+		User user = new User();
+		user.setUsername("testdatasource");
+		userService.insert(user);
+		logger.info("success");
+	}
+
 
 
 	/**

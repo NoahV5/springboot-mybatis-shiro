@@ -142,10 +142,7 @@ public class MultipleDataSourceBeanDefinitionRegistryPostProcessor implements Be
            /*
             * 获取到子属性，对应一个map;
             * 也就是这个map的key就是
-            *
             * type、driver-class-name等;
-            *
-            *
             */
 			Map<String, Object> dsMap = propertyResolver.getSubProperties(dsPrefix + ".");
 			//存放到一个map集合中，之后在注入进行使用.
