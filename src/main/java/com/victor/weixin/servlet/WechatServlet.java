@@ -1,6 +1,6 @@
 package com.victor.weixin.servlet;
 
-import com.victor.weixin.utils.SignUtil;
+import com.victor.common.utils.weixin.SignUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Springboot注入微信接入的Servlet
  */
 //不指定name的情况下,name默认值为类的全路径,即org.springboot.sample.servlet.WechatServlet
-@WebServlet(urlPatterns = "wechat/myservlet",description = "Servlet说明")
+@WebServlet(urlPatterns = "/",description = "Servlet说明")
 public class WechatServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -8685285401859800066L;
