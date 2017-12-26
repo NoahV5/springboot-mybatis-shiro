@@ -74,7 +74,7 @@ public class BaseController {
      */
     public String getCurrentLoginUsername() {
         Subject currentUser = SecurityUtils.getSubject();
-       // User user = currentUser.getPrincipals().oneByType(User.class);
+        User user = currentUser.getPrincipals().oneByType(User.class);
         return null;
     }
 

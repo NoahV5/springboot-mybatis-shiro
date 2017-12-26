@@ -7,9 +7,6 @@ import com.victor.sys.entity.Menu;
 import com.victor.sys.entity.User;
 import com.victor.sys.service.IPermissionService;
 import com.victor.sys.service.IUserService;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Resource;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -21,6 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Aaron on 2017/12/18.
@@ -48,7 +49,16 @@ public class IndexController extends BaseController{
 	}
 
 	/**
-	 * 登录成功后跳转到主页面
+	 * 主页预览
+	 * @return
+	 */
+	@RequestMapping(value = "/index_1")
+	public String index_1() {
+		return "/md";
+	}
+
+	/**
+	 * 登录成功后主页面介绍
 	 * @return
 	 */
 	@RequestMapping("/index")
@@ -57,16 +67,6 @@ public class IndexController extends BaseController{
 		List<Menu> menus = permissionService.createMenu(getCurrentLoginId());
 		model.addAttribute("menus",menus);
 		return "/admin/index";
-	}
-
-	@TargetDataSource(name = "test1")
-	@RequestMapping("/test")
-	@Transactional
-	public void test2(){
-		User user = new User();
-		user.setUsername("testdatasource");
-		userService.insert(user);
-		logger.info("success");
 	}
 
 
@@ -96,5 +96,15 @@ public class IndexController extends BaseController{
 			return "redirect:/admin/index.html";
 		}
 		return "/admin/index";
+	}
+
+	@TargetDataSource(name = "test1")
+	@RequestMapping("/test")
+	@Transactional
+	public void test2(){
+		User user = new User();
+		user.setUsername("testdatasource");
+		userService.insert(user);
+		logger.info("success");
 	}
 }
