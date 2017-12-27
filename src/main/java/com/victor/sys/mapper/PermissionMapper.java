@@ -3,9 +3,9 @@ package com.victor.sys.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.victor.sys.entity.Permission;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -23,6 +23,8 @@ public interface PermissionMapper extends BaseMapper<Permission> {
      * @return
      */
     List<Permission> findUserPermission(Long uid);
+
+    List<Permission> findParentMenu(Long uid);
 
     /**
      * 查询子菜单

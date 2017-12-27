@@ -1,9 +1,6 @@
 
 package com.victor.config.shiro;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -20,6 +17,9 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 /**
@@ -75,7 +75,8 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/sencCode", "anon"); // 发送邮箱验证码
 		filterChainDefinitionMap.put("/admin/isUsername/**", "anon"); // 判断用户名是否存在
 		filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
-		//filterChainDefinitionMap.put("/**", "authc");
+		filterChainDefinitionMap.put("/coreServlet/**", "anon"); // 微信相关
+		filterChainDefinitionMap.put("/**", "authc");
 		/**
 		 * anon:所有url都都可以匿名访问;
 		 * authc: 需要认证才能进行访问;

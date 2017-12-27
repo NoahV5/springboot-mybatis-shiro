@@ -18,17 +18,18 @@
 		<result column="gmt_modified" property="gmtModified" />
 	</resultMap>
 
-	<select id="findUserPermission" resultMap="BaseResultMap">
+	<!-- 查询父菜单 -->
+	<select id="findParentMenu" resultMap="BaseResultMap">
 		SELECT * from permission WHERE id in
 		(
 		select pid from role_permission WHERE rid in
 		(
 		select rid from user_role INNER JOIN role on user_role.rid = role.id where uid = #{0} and status = 1
 		)
-		) and status = 1 and type in (1,2)
+		) and status = 1 and type = 0
 	</select>
-	
 
+	<!-- 查询子菜单 -->
 	<select id="findSubMenu" resultMap="BaseResultMap">
 		SELECT * from permission WHERE id in
 		(
@@ -37,6 +38,16 @@
 		select rid from user_role INNER JOIN role on user_role.rid = role.id where uid = #{uid} and status = 1
 		)
 		) and status = 1 and type = 1 and pid = #{pid}
+	</select>
+
+	<select id="findUserPermission" resultMap="BaseResultMap">
+		SELECT * from permission WHERE id in
+		(
+		select pid from role_permission WHERE rid in
+		(
+		select rid from user_role INNER JOIN role on user_role.rid = role.id where uid = #{0} and status = 1
+		)
+		) and status = 1 and type in (1,2)
 	</select>
 
 </mapper>

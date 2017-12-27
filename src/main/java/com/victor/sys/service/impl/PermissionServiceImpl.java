@@ -6,11 +6,11 @@ import com.victor.sys.entity.Menu;
 import com.victor.sys.entity.Permission;
 import com.victor.sys.mapper.PermissionMapper;
 import com.victor.sys.service.IPermissionService;
-import java.util.ArrayList;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,16 +52,19 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
      * @param currentLoginId
      * @return
      */
-    @Override public List<Menu> createMenu(Long currentLoginId) {
-        List<Menu> menus  =  new ArrayList<>();
-        //获取用户的父菜单集合
-        List<Permission> userPermission = this.findUserPermission(currentLoginId);
-        userPermission.parallelStream().forEach(e->{
+    @Override
+    public List<Menu> createMenu(Long currentLoginId) {
+        // 创建菜单对象
+        List<Menu> menus = new ArrayList<>();
+
+        // 查询父菜单
+        List<Permission> parentMenu = baseMapper.findParentMenu(currentLoginId);
+        parentMenu.forEach(p -> {
             Menu menu = new Menu();
-            BeanUtils.copyProperties(e,menu);
+            BeanUtils.copyProperties(p, menu);
             menus.add(menu);
         });
-        //获取子菜单集合
+
         // 查询子菜单
         menus.forEach(m -> {
             List<Menu> temp = new ArrayList<>();

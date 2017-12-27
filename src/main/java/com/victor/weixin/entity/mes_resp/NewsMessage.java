@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Aaron on 2017/12/22.
  * 响应消息之图文消息
  */
-public class NewsMessage {
+public class NewsMessage extends BaseMessage4Resp{
 
 	// 图文消息个数，限制为10条以内
 	private int ArticleCount;

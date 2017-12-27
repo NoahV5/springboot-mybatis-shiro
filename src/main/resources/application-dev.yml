@@ -2,7 +2,7 @@
 
 #端口
 server:
-  port: 8090
+  port: 80
 
 #文件上传路径
 file-upload-path: E:/test
