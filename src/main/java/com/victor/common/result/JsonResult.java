@@ -5,6 +5,7 @@ package com.victor.common.result;
  * Describe: 封装Json返回信息
  */
 public class JsonResult {
+
     private boolean success;
     private String status;
     private String msg;

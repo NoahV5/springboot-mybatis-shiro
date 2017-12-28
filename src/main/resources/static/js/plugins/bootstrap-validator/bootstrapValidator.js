@@ -2292,7 +2292,7 @@ if (typeof jQuery === 'undefined') {
             // R
             'red', 'rosybrown', 'royalblue',
             // S
-            'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue',
+            'saddlebrown', 'salmon', 'sVictorbrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue',
             'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue',
             // T
             'tan', 'teal', 'thistle', 'tomato', 'transparent', 'turquoise',

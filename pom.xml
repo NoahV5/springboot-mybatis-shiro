@@ -190,10 +190,6 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>3.2.4.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-cas</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -203,6 +199,16 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>utf8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

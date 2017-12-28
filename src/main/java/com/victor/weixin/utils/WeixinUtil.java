@@ -1,8 +1,7 @@
+/*
 package com.victor.weixin.utils;
 
-import com.alibaba.fastjson.JSONException;
 import com.victor.common.utils.StringUtil;
-import com.victor.weixin.entity.AccessToken;
 import com.victor.weixin.entity.Menu;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
@@ -19,17 +18,23 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.URL;
+import java.util.TreeMap;
 
+*/
 /**
  * @author Victor
  * @date 2017/12/27
  * 公众平台通用接口工具类
- */
+ *//*
+
 public class WeixinUtil {
 
-    private static String appId  = "wx28c2c2027c86e748";//开发者ID
+    private static String appId  = "wx2db12e2ea6075665";//开发者ID
 
-    private static String appSecret = "21448841c24f6e252063724de8ad5733";  //开发者密码
+    private static String appSecret = "07368fd72c8a8144232c7eb474471adb";  //开发者密码
+
+    //private static String appId  = "wx28c2c2027c86e748";//开发者ID
+    //private static String appSecret = "21448841c24f6e252063724de8ad5733";  //开发者密码
 
     private static Logger log = LoggerFactory.getLogger(WeixinUtil.class);
 
@@ -39,14 +44,16 @@ public class WeixinUtil {
     // 菜单创建（POST） 限100（次/天）
     public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
-    /**
+    */
+/**
      * 发起https请求并获取结果
      *
      * @param requestUrl 请求地址
      * @param requestMethod 请求方式（GET、POST）
      * @param outputStr 提交的数据
      * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
-     */
+     *//*
+
     public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr) {
         JSONObject jsonObject = null;
         StringBuffer buffer = new StringBuffer();
@@ -103,40 +110,35 @@ public class WeixinUtil {
         return jsonObject;
     }
 
-    /**
-     * 获取access_token
+    */
+/**
+     * 获取授权token
      *
-     * @param appid 凭证
-     * @param appsecret 密钥
-     * @return
-     */
-    public static AccessToken getAccessToken(String appid, String appsecret) {
+     * @param key
+     *            应用key
+     * @param secret
+     *            应用密匙
+     * @return json格式的字符串
+     *//*
 
-        AccessToken accessToken = null;
-        String requestUrl = access_token_url.replace("APPID", appid).replace("APPSECRET", appsecret);
-        JSONObject jsonObject = httpRequest(requestUrl, "GET",null );
-        // 如果请求成功
-        if ( null != jsonObject) {
-            try {
-                accessToken = new AccessToken();
-                accessToken.setToken(jsonObject.getString("access_token"));
-                accessToken.setExpiresIn(jsonObject.getInt("expires_in"));
-            } catch (JSONException e) {
-                accessToken = null;
-                // 获取token失败
-                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
-            }
-        }
-        return accessToken;
+    public String getAccessToken(String key, String secret) {
+        TreeMap<String, String> map = new TreeMap<String, String>();
+        map.put("grant_type", "client_credential");
+        map.put("appid", key);
+        map.put("secret", secret);
+        String result = Connection.HttpDefaultExecute("GET", token_path, map, "");
+        return result;
     }
 
-    /**
+    */
+/**
      * 创建菜单
      *
      * @param menu 菜单实例
      * @param accessToken 有效的access_token
      * @return 0表示成功，其他值表示失败
-     */
+     *//*
+
     public static int createMenu(Menu menu, String accessToken) {
         int result = 0;
 
@@ -160,3 +162,4 @@ public class WeixinUtil {
 
 
 
+*/
