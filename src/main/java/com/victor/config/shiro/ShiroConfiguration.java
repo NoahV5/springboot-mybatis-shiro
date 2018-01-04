@@ -77,6 +77,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
 		filterChainDefinitionMap.put("/coreServlet/**", "anon"); // 微信相关
 		filterChainDefinitionMap.put("/wx/**", "anon"); // 微信相关
+		filterChainDefinitionMap.put("/distributedLockTest/**", "anon"); // 微信相关
 		filterChainDefinitionMap.put("/**", "authc");
 		/**
 		 * anon:所有url都都可以匿名访问;

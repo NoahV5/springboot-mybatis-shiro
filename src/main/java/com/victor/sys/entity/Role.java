@@ -1,18 +1,15 @@
 package com.victor.sys.entity;
 
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.enums.IdType;
-
-import java.util.Collections;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Date;
 
 /**
  * <p>
@@ -25,6 +22,12 @@ import java.util.Set;
 @Entity//声明一个实体，用的是Java规范下的注解
 @Table(name="role")
 public class Role extends Model<Role> {
+
+
+	public Role ( String name){
+
+		this.name = name;
+	}
 
     private static final long serialVersionUID = 1L;
 
