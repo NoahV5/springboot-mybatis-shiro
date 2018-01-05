@@ -1,8 +1,8 @@
-package com.victor.redis;
+package com.victor.redis2;
 
 /**
  * @author Victor
- * @date 2018/01/04
+ * @date 2018/01/05
  * 分布式锁回调接口
  */
 public interface DistributedLockCallback<T> {

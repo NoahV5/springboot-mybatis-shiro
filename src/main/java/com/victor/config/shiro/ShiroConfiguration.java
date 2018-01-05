@@ -77,7 +77,7 @@ public class ShiroConfiguration {
 		filterChainDefinitionMap.put("/admin/isEmail/**", "anon"); // 判断邮箱是否存在
 		filterChainDefinitionMap.put("/coreServlet/**", "anon"); // 微信相关
 		filterChainDefinitionMap.put("/wx/**", "anon"); // 微信相关
-		filterChainDefinitionMap.put("/distributedLockTest/**", "anon"); // 微信相关
+		filterChainDefinitionMap.put("/redlock/**", "anon"); // 微信相关
 		filterChainDefinitionMap.put("/**", "authc");
 		/**
 		 * anon:所有url都都可以匿名访问;
@@ -139,7 +139,7 @@ public class ShiroConfiguration {
 	 * 可见securityManager是整个shiro的核心；
 	 * @return
 	 */
-	@Bean
+	//@Bean
 	public EhCacheManager ehCacheManager(){
 		EhCacheManager cacheManager = new EhCacheManager();
 		cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
